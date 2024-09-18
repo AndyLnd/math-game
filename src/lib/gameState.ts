@@ -4,7 +4,7 @@ import windSound from '$lib/sounds/wind.webm';
 import successSound from '$lib/sounds/success.webm';
 import failSound from '$lib/sounds/fail.webm';
 import owwSound from '$lib/sounds/oww.webm';
-import { Howl } from 'howler';
+import { Howl, Howler } from 'howler';
 
 export enum GAMESTATE {
 	HOME,
@@ -19,6 +19,10 @@ const fail = new Howl({ src: [failSound], volume: 0.5 });
 const oww = new Howl({ src: [owwSound], volume: 0.5 });
 
 export const gameState = writable(GAMESTATE.HOME);
+
+export const isMuted = persistWritable('isMuted', false);
+
+isMuted.subscribe(_isMuted=> Howler.mute(_isMuted))
 
 export const fallSpeed = writable(0.1);
 export const playerTop = writable(-5);
@@ -65,7 +69,7 @@ export const startGame = () => {
 
 const hurt = () => {
 	health.update((h) => h - 1);
-	oww.play();
+	setTimeout(() => oww.play(), 250);
 };
 
 const gameLoop = () => {
@@ -78,8 +82,8 @@ const gameLoop = () => {
 			} else {
 				success.play();
 			}
-      showMonster.set(true);
-      isMonsterLeft.set(!get(isAnswerLeft));
+			showMonster.set(true);
+			isMonsterLeft.set(!get(isAnswerLeft));
 			fallSpeed.update((f) => f + 0.01);
 			generateQuestion(get(levelChoices));
 		}
@@ -98,7 +102,7 @@ const die = () => {
 		isGameOver.set(true);
 		hasQuestion.set(false);
 	});
-	fail.play();
+	setTimeout(() => fail.play(), 500);
 	fadeTo(25, 60, 1000, playerTop.set);
 	wind.fade(0.1, 0, 2000);
 };

@@ -20,7 +20,7 @@
 					type="checkbox"
 					checked={$levelChoices.includes(level)}
 					onchange={() => handleClick(level)}
-				/>× {level}</label
+				/>&nbsp;× {level}</label
 			>
 		{/each}
 	</div>
@@ -37,16 +37,51 @@
 		position: absolute;
 		font-family: 'Playpen Sans', sans-serif;
 		color: white;
+		font-size: 3vmin;
 	}
 
 	div.choice {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
+		gap: 1vmin 4vmin;
 	}
 	h1 {
 		padding-top: 2vmin;
 		font-size: 8vmin;
 		line-height: 120%;
 		text-align: center;
+	}
+
+	label {
+		display: flex;
+	}
+	label input {
+		display: none;
+	}
+	label::before {
+		content: '';
+		display: flex;
+		border: 0.5vmin solid white;
+		width: 4vmin;
+		height: 4vmin;
+		justify-content: center;
+		align-items: center;
+		border-radius: 1vmin;
+	}
+	label:has(input:checked)::before {
+		content: '✓';
+	}
+
+	button {
+    margin-top: 6vmin;
+		display: flex;
+		font-family: 'Playpen Sans', sans-serif;
+    color: black;
+    background-color: white;
+		border: none;
+    border-radius: 1vmin;
+    font-size: 6vmin;
+    font-weight: bold;
+    padding: 0 6vmin;
 	}
 </style>

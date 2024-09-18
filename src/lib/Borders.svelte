@@ -29,7 +29,7 @@
 		spikes.map((v, i) => `l ${v - (spikes[i - 1] ?? 0)},1`).join(' ');
 </script>
 
-<g fill="#dacdd8">
+<g >
 	<path
 		d="M0,-2 l3,0 {makePath(spikesL3)} L0,65 Z"
 		transform="translate(0,{1 - (position % 1)}) scale(.8)"
@@ -40,7 +40,6 @@
 		transform="translate(0,{1 - (position % 1)}) scale(.9)"
 		fill="#656"
 	/>
-	<path d="M0,-2 l1,0 {makePath(spikesL1)} L0,50 Z" transform="translate(0,{1 - (position % 1)})" />
 	<path
 		d="M30,-2 l-4,0 {makePath(spikesR3)} L30,65 Z"
 		transform="translate(0,{1 - (position % 1)}) scale(.8)"
@@ -53,8 +52,15 @@
 		transform-origin="right top"
 		fill="#656"
 	/>
-	<path
-		d="M30,-2 l-2,0 {makePath(spikesR1)} L30,50 Z"
-		transform="translate(0,{1 - (position % 1)})"
-	/>
+	<g id="topborder" fill="#dacdd8">
+		<path
+			d="M0,-2 l1,0 {makePath(spikesL1)} L0,50 Z"
+			transform="translate(0,{1 - (position % 1)})"
+		/>
+		<path
+			z={10}
+			d="M30,-2 l-2,0 {makePath(spikesR1)} L30,50 Z"
+			transform="translate(0,{1 - (position % 1)})"
+		/>
+	</g>
 </g>

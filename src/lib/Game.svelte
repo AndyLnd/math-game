@@ -15,15 +15,13 @@
 		gameState,
 		GAMESTATE,
 		showMonster,
-
 		isMonsterLeft
-
 	} from './gameState';
 </script>
 
 <g>
 	<Health />
-	<text class="small" x={27} y={3} text-anchor="end">{$depth.toFixed(0)} Meter</text>
+	<text class="small" x={22} y={3} text-anchor="end">{$depth.toFixed(0)} Meter</text>
 	{#if $hasQuestion}
 		<text class="question" x={15} y={15} text-anchor="middle">{$currentQuestion}</text>
 		<text x={8} y={30 + $answerOffset} text-anchor="middle"
@@ -51,6 +49,7 @@
 	{#if $showMonster}
 		<Monster isLeft={$isMonsterLeft} />
 	{/if}
+	<use xlink:href="#topborder" />
 </g>
 
 <style>
