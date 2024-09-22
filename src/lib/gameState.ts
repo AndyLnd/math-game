@@ -22,7 +22,7 @@ export const gameState = writable(GAMESTATE.HOME);
 
 export const isMuted = persistWritable('isMuted', false);
 
-isMuted.subscribe(_isMuted=> Howler.mute(_isMuted))
+isMuted.subscribe((_isMuted) => Howler.mute(_isMuted));
 
 export const fallSpeed = writable(0.1);
 export const playerTop = writable(-5);
@@ -75,7 +75,7 @@ const hurt = () => {
 const gameLoop = () => {
 	const fs = get(fallSpeed) / 4;
 	if (hasQuestion) {
-		answerOffset.update((ao) => ao - fs);
+		answerOffset.update((ao) => ao - fs / 2);
 		if (get(answerOffset) < 0) {
 			if (get(isPlayerLeft) !== get(isAnswerLeft)) {
 				hurt();
